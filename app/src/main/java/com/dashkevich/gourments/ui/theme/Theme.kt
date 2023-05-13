@@ -1,13 +1,9 @@
 package com.dashkevich.gourments.ui.theme
 
 import android.app.Activity
-import android.content.Context
-import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.ViewCompat
 import com.dashkevich.gourments.ui.theme.model.GourmentsColorScheme
@@ -53,10 +49,40 @@ fun GourmentsTheme(
             ViewCompat.getWindowInsetsController(view)?.isAppearanceLightNavigationBars = darkTheme
         }
     }
-
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
+    CompositionLocalProvider(
+        LocalColorProvider provides colorScheme,
+        LocalShapeProvider provides GourmentsShape,
+        LocalTypographyProvider provides GourmentsTypography,
         content = content
     )
 }
+
+object Theme {
+    val colors: GourmentsColorScheme
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalColorProvider.current
+
+    val shapes: GourmentsShape
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalShapeProvider.current
+
+    val fonts: GourmentsTypography
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalTypographyProvider.current
+}
+
+val LocalColorProvider = staticCompositionLocalOf<GourmentsColorScheme> {
+    error("No colors")
+}
+
+val LocalShapeProvider = staticCompositionLocalOf<GourmentsShape> {
+    error("No shapes")
+}
+
+val LocalTypographyProvider = staticCompositionLocalOf<GourmentsTypography> {
+    error("No fonts")
+}
+
