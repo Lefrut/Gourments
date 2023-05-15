@@ -9,9 +9,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.dashkevich.gourmets.ui.screens.catalog.companents.GourmetsTopAppBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CatalogScreen() {
+    Scaffold(
+        topBar = {
+            GourmetsTopAppBar()
+        }
+    ) {
 
+    }
 }
