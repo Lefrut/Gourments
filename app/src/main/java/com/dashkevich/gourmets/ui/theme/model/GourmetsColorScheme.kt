@@ -1,9 +1,9 @@
-package com.dashkevich.gourments.ui.theme.model
+package com.dashkevich.gourmets.ui.theme.model
 
 import androidx.compose.ui.graphics.Color
 
 
-data class GourmentsColorScheme(
+data class GourmetsColorScheme(
     val primary: Color,
     val background: Color,
     val surface: Color,

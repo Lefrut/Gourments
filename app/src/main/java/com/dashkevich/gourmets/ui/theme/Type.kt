@@ -1,4 +1,4 @@
-package com.dashkevich.gourments.ui.theme
+package com.dashkevich.gourmets.ui.theme
 
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -6,8 +6,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
-import com.dashkevich.gourments.R
-import com.dashkevich.gourments.ui.theme.model.GourmentsTypography
+import com.dashkevich.gourmets.R
+import com.dashkevich.gourmets.ui.theme.model.GourmetsTypography
 
 
 val Roboto = FontFamily(
@@ -22,7 +22,7 @@ val SFProText = FontFamily(
 
 )
 
-val GourmentsTypography = GourmentsTypography(
+val GourmetsTypography = GourmetsTypography(
     button = TextStyle(
         fontFamily = Roboto,
         fontWeight = FontWeight.Medium,

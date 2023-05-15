@@ -1,4 +1,4 @@
-package com.dashkevich.gourments
+package com.dashkevich.gourmets
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -9,8 +9,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.dashkevich.gourments.ui.theme.GourmentsTheme
-import com.dashkevich.gourments.ui.theme.Theme
+import com.dashkevich.gourmets.ui.navigation.AppNavigation
+import com.dashkevich.gourmets.ui.theme.GourmentsTheme
+import com.dashkevich.gourmets.ui.theme.Theme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,22 +22,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = Theme.colors.surface
                 ) {
-
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    GourmentsTheme {
-        Greeting("Android")
     }
 }

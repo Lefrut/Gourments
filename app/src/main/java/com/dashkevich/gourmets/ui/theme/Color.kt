@@ -1,4 +1,4 @@
-package com.dashkevich.gourments.ui.theme
+package com.dashkevich.gourmets.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

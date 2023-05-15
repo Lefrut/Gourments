@@ -1,8 +1,8 @@
-package com.dashkevich.gourments.ui.theme.model
+package com.dashkevich.gourmets.ui.theme.model
 
 import androidx.compose.ui.text.TextStyle
 
-data class GourmentsTypography(
+data class GourmetsTypography(
     val button: TextStyle,
     val body2: TextStyle,
     val body2Secondary: TextStyle,
