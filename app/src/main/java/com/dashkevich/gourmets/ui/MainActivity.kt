@@ -1,4 +1,4 @@
-package com.dashkevich.gourmets
+package com.dashkevich.gourmets.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
