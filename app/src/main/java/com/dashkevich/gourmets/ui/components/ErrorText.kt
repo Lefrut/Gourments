@@ -12,7 +12,7 @@ import com.dashkevich.gourmets.ui.theme.Theme
 fun ErrorText(modifier: Modifier = Modifier) {
     Text(
         text = stringResource(R.string.Ошибка_получения_данный),
-        style = Theme.fonts.h4,
+        style = Theme.fonts.defaultRegularBody,
         color = Color.Red,
         modifier = modifier
     )

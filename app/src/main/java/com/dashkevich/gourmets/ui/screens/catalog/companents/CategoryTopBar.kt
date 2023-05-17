@@ -66,7 +66,7 @@ fun GourmetsTopBar(modifier: Modifier = Modifier, categoriesTab: CategoriesTab) 
                 .background(color = Theme.colors.surface)
         )
         spacer()
-        Box(modifier = Modifier.height(40.dp)) {
+        Box(modifier = Modifier.height(40.dp).fillMaxWidth().background(color = Theme.colors.surface)) {
             when (categoriesTab.state) {
                 OperationState.EmptyResult -> {
                     Text(

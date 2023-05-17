@@ -1,5 +1,6 @@
 package com.dashkevich.gourmets.ui.screens.catalog
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.dashkevich.gourmets.common.OperationState
 import com.dashkevich.gourmets.common.mvi.BaseViewModel
@@ -20,7 +21,13 @@ class CatalogViewModel(
 
     override fun processingIntent(intent: CatalogIntent) {
         when (intent) {
-            else -> {}
+            CatalogIntent.ClickedFilter -> {}
+            CatalogIntent.ClickedSearch -> {}
+            is CatalogIntent.ClickedTab -> {}
+            CatalogIntent.VisitScreen -> {
+                Log.i("CatalogViewModel", "Visit Screen used")
+                getCategories()
+            }
         }
     }
 
