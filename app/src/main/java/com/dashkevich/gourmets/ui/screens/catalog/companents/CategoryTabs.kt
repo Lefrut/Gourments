@@ -1,6 +1,5 @@
 package com.dashkevich.gourmets.ui.screens.catalog.companents
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,15 +11,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.dashkevich.gourmets.ui.screens.catalog.model.mvi.CategoriesTab
 import com.dashkevich.gourmets.ui.theme.GourmetsTheme
 import com.dashkevich.gourmets.ui.theme.Theme
 import com.dashkevich.gourmets.ui.util.ZeroCardElevation
 
 
 @Composable
-fun CategoryTabs() {
+fun CategoryTabs(categoriesTab: CategoriesTab) {
     var selectedCategory by remember { mutableStateOf(0) }
-    val foodCategories = listOf("Роллы", "Наборы", "Горячие блюда", "Супы")
 
     ScrollableTabRow(
         modifier = Modifier.fillMaxWidth(),
@@ -30,7 +29,7 @@ fun CategoryTabs() {
         indicator = { },
         containerColor = Theme.colors.surface
     ) {
-        foodCategories.forEachIndexed { index, title ->
+        categoriesTab.categories.forEachIndexed { index, category ->
             val tabPadding = when (index) {
                 0 -> {
                     PaddingValues(0.dp)
@@ -43,7 +42,7 @@ fun CategoryTabs() {
                 modifier = Modifier.padding(tabPadding),
                 isSelected = selectedCategory == index,
                 onClick = { selectedCategory = index },
-                name = title
+                name = category.name
             )
 
         }
@@ -64,7 +63,7 @@ private fun TabCategory(
         Pair(Color.Transparent, Theme.colors.onSurfaceSecondary)
     Card(
         modifier = modifier
-            .height(40.dp)
+            .fillMaxHeight()
             .clickable { onClick() },
         shape = RoundedCornerShape(Theme.shapes.default),
         colors = CardDefaults.cardColors(

@@ -29,7 +29,7 @@ fun CatalogScreen(
 ) {
     Scaffold(
         topBar = {
-            GourmetsTopBar()
+            GourmetsTopBar(categoriesTab = viewState.categoriesTab)
         },
         bottomBar = {
             CatalogButton()
