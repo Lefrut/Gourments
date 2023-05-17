@@ -1,4 +1,4 @@
-package com.dashkevich.gourmets.di
+package com.dashkevich.gourmets.di.other
 
 import com.dashkevich.gourmets.ui.screens.catalog.CatalogViewModel
 import com.dashkevich.gourmets.ui.screens.product_card.ProductCardViewModel
