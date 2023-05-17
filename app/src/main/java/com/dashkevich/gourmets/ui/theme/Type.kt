@@ -56,6 +56,7 @@ val GourmetsTypography = GourmetsTypography(
         lineHeight = 24.sp
     ),
     h18 = TextStyle(
+        //Todo fix font
         fontFamily = Roboto,
         //Todo("Roboto - SemiBold по дизайну")
         fontWeight = FontWeight.Bold,

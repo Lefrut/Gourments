@@ -29,7 +29,7 @@ private val LightColorScheme = GourmetsColorScheme(
 )
 
 @Composable
-fun GourmentsTheme(
+fun GourmetsTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
@@ -42,8 +42,8 @@ fun GourmentsTheme(
     if (!view.isInEditMode) {
         SideEffect {
             with((view.context as Activity).window) {
-                statusBarColor = colorScheme.primary.toArgb()
-                navigationBarColor = colorScheme.primary.toArgb()
+                statusBarColor = colorScheme.surface.toArgb()
+                navigationBarColor = colorScheme.surface.toArgb()
             }
             ViewCompat.getWindowInsetsController(view)?.isAppearanceLightStatusBars = darkTheme
             ViewCompat.getWindowInsetsController(view)?.isAppearanceLightNavigationBars = darkTheme
