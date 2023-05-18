@@ -35,9 +35,8 @@ fun ProductCardScreen(
     effectFlow: Flow<ProductCardEffect>,
     onSendEvent: (event: ProductCardEvent) -> Unit,
     navController: NavController,
-    productId: Int
 ) {
-    val product: Product = Gson().fromJson(productJsonExample, Product::class.java)
+    val product: Product = viewState.product[0]
     val scrollState = rememberScrollState()
     Box {
         Column(modifier = Modifier.verticalScroll(scrollState)) {

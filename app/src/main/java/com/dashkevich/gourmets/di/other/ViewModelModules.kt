@@ -10,8 +10,8 @@ val viewModelModules = module {
         CatalogViewModel()
     }
 
-    viewModel{
-        ProductCardViewModel()
+    viewModel{ param ->
+        ProductCardViewModel(gourmetsRepository = get(), id = param.get())
     }
 
 }
