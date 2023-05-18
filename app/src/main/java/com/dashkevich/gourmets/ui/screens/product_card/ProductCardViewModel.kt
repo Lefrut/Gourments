@@ -11,8 +11,8 @@ class ProductCardViewModel: MVIViewModel<ProductCardEvent, ProductCardState, Pro
 
     override fun handleEvents(event: ProductCardEvent) {
         when(event){
-            else -> {
-
+            ProductCardEvent.ClickedArrowBack -> {
+                 setEffect { ProductCardEffect.NavigateBack }
             }
         }
     }

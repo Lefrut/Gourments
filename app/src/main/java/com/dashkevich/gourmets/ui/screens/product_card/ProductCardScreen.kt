@@ -1,10 +1,12 @@
 package com.dashkevich.gourmets.ui.screens.product_card
 
+import android.util.Log
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,6 +24,8 @@ import com.dashkevich.gourmets.ui.screens.product_card.model.ProductCardEvent
 import com.dashkevich.gourmets.ui.screens.product_card.model.ProductCardState
 import com.dashkevich.gourmets.ui.theme.Theme
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
 
 @Composable
 fun ProductCardScreen(
@@ -31,5 +35,18 @@ fun ProductCardScreen(
     navController: NavController,
     product: Product
 ) {
+    Box {
+        BackArrow(onClick = { onSendEvent(ProductCardEvent.ClickedArrowBack) })
+    }
+    LaunchedEffect(key1 = Unit){
+        effectFlow.onEach { effect ->
+            when(effect){
+                ProductCardEffect.NavigateBack -> {
+                    Log.i("ProductCardScreen", "Effect active")
+                    navController.popBackStack()
+                }
+            }
+        }.collect()
+    }
 
 }
