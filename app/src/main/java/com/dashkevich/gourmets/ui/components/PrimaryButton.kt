@@ -13,9 +13,9 @@ import androidx.compose.ui.unit.dp
 import com.dashkevich.gourmets.ui.theme.Theme
 
 @Composable
-fun PrimaryButton(onClick: () -> Unit, content: @Composable RowScope.() -> Unit) {
+fun PrimaryButton(onClick: () -> Unit, content: @Composable RowScope.() -> Unit, modifier: Modifier = Modifier) {
     Button(
-        modifier = Modifier.fillMaxSize().padding(PaddingValues(horizontal = 16.dp, vertical = 12.dp)),
+        modifier = modifier,
         onClick = {
             onClick()
         },

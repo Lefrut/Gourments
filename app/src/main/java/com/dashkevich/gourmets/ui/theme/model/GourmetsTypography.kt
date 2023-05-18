@@ -12,5 +12,6 @@ data class GourmetsTypography(
     val body1MediumSecondary: TextStyle,
     val body1Medium: TextStyle,
     val defaultRegularBody: TextStyle,
-    val defaultBoldCaption2: TextStyle
+    val defaultBoldCaption2: TextStyle,
+    val h6: TextStyle
 )

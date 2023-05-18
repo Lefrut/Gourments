@@ -2,6 +2,7 @@ package com.dashkevich.gourmets.ui.screens.catalog.companents
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -20,7 +21,7 @@ import com.dashkevich.gourmets.ui.theme.Theme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GourmetsTopBar(modifier: Modifier = Modifier, categoriesTab: CategoriesTab) {
+fun GourmetsTopBar(modifier: Modifier = Modifier, categoriesTab: CategoriesTab, onClickFilter: () -> Unit) {
 
     //Todo - фиксация топлайна при прокруте
     Column(
@@ -46,6 +47,9 @@ fun GourmetsTopBar(modifier: Modifier = Modifier, categoriesTab: CategoriesTab) 
                     modifier = Modifier
                         .padding(PaddingValues(start = 20.dp, top = 28.dp))
                         .size(20.dp)
+                        .clickable {
+                            onClickFilter()
+                        }
                 )
             },
             actions = {

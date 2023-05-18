@@ -11,7 +11,7 @@ import com.dashkevich.gourmets.ui.theme.Theme
 @Composable
 fun ErrorText(modifier: Modifier = Modifier) {
     Text(
-        text = stringResource(R.string.Ошибка_получения_данный),
+        text = stringResource(R.string.Ошибка_получения_данных),
         style = Theme.fonts.defaultRegularBody,
         color = Color.Red,
         modifier = modifier

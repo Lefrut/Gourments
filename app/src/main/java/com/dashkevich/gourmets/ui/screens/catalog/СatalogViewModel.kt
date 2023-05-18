@@ -44,12 +44,27 @@ class CatalogViewModel(
     override fun handleEvents(event: CatalogEvent) {
         when (event) {
             CatalogEvent.ClickedFilter -> {
+                setState { copy(openBottomSheet = !openBottomSheet) }
+                if(viewState.value.filters.isEmpty()){
 
+                }
             }
             CatalogEvent.ClickedSearch -> {
 
             }
             is CatalogEvent.ClickedTab -> {
+
+            }
+            is CatalogEvent.ClickedButtonFilter -> {
+
+            }
+            is CatalogEvent.ClickedFoodCard -> {
+
+            }
+            is CatalogEvent.ClickedItemFilter -> {
+
+            }
+            is CatalogEvent.CloseBottomSheet -> {
 
             }
         }

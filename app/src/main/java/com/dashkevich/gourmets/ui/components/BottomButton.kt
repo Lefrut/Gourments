@@ -26,8 +26,11 @@ fun BoxScope.BottomButton(onClick: () -> Unit, content: @Composable () -> Unit) 
             .background(color = Theme.colors.surface),
         contentAlignment = Alignment.Center
     ) {
-        PrimaryButton(onClick = { onClick() }) {
-            content()
-        }
+        PrimaryButton(
+            onClick = { onClick() },
+            modifier = Modifier.size(width = 343.dp, height = 48.dp),
+            content = {
+                content()
+            })
     }
 }
