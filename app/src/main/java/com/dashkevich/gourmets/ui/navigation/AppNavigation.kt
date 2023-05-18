@@ -9,9 +9,6 @@ import androidx.navigation.navArgument
 import com.dashkevich.gourmets.ui.navigation.destinations.CatalogScreenDestination
 import com.dashkevich.gourmets.ui.navigation.destinations.ProductCardScreenDestination
 import com.dashkevich.gourmets.ui.navigation.model.NavigationTree
-import com.dashkevich.gourmets.ui.util.productExample
-import com.dashkevich.gourmets.ui.util.productJsonExample
-import com.google.gson.Gson
 
 @Composable
 fun AppNavigation() {
@@ -26,15 +23,15 @@ fun AppNavigation() {
             CatalogScreenDestination(navController = navController)
         }
         composable(
-            route = NavigationTree.Routes.PRODUCT_CARD + "/{${NavigationTree.Args.PRODUCT}}",
-            arguments = listOf(navArgument(NavigationTree.Args.PRODUCT) {
-                type = NavType.StringType
+            route = NavigationTree.Routes.PRODUCT_CARD + "/{${NavigationTree.Args.PRODUCT_ID}}",
+            arguments = listOf(navArgument(NavigationTree.Args.PRODUCT_ID) {
+                type = NavType.IntType
             })
         ) { it ->
-            it.arguments?.getString(NavigationTree.Args.PRODUCT)?.let { json ->
+            it.arguments?.getInt(NavigationTree.Args.PRODUCT_ID)?.let { id ->
                 ProductCardScreenDestination(
                     navController = navController,
-                    productJson = json
+                    productId = id
                 )
 
             }

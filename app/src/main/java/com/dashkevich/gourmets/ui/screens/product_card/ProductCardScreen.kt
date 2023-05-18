@@ -23,6 +23,8 @@ import com.dashkevich.gourmets.ui.screens.product_card.model.ProductCardEffect
 import com.dashkevich.gourmets.ui.screens.product_card.model.ProductCardEvent
 import com.dashkevich.gourmets.ui.screens.product_card.model.ProductCardState
 import com.dashkevich.gourmets.ui.theme.Theme
+import com.dashkevich.gourmets.ui.util.productJsonExample
+import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
@@ -33,8 +35,9 @@ fun ProductCardScreen(
     effectFlow: Flow<ProductCardEffect>,
     onSendEvent: (event: ProductCardEvent) -> Unit,
     navController: NavController,
-    product: Product
+    productId: Int
 ) {
+    val product: Product = Gson().fromJson(productJsonExample, Product::class.java)
     val scrollState = rememberScrollState()
     Box {
         Column(modifier = Modifier.verticalScroll(scrollState)) {

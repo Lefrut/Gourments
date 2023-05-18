@@ -3,7 +3,7 @@ package com.dashkevich.gourmets.ui.navigation.model
 object NavigationTree {
 
     object Args{
-        const val PRODUCT = "product"
+        const val PRODUCT_ID = "product"
     }
 
     object Routes{
