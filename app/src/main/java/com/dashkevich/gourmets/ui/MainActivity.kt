@@ -6,9 +6,14 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
 import com.dashkevich.gourmets.ui.navigation.AppNavigation
+import com.dashkevich.gourmets.ui.navigation.destinations.ProductCardScreenDestination
+import com.dashkevich.gourmets.ui.navigation.model.NavigationTree
 import com.dashkevich.gourmets.ui.theme.GourmetsTheme
 import com.dashkevich.gourmets.ui.theme.Theme
+import com.dashkevich.gourmets.ui.util.productExample
+import com.google.gson.Gson
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +24,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = Theme.colors.surface
                 ) {
-                    AppNavigation()
+                    val productJson = Gson().toJson(productExample)
+                    ProductCardScreenDestination(navController = rememberNavController(), productJson = productJson )
+                    //AppNavigation()
                 }
             }
         }
