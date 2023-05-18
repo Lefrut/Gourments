@@ -24,9 +24,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = Theme.colors.surface
                 ) {
-                    val productJson = Gson().toJson(productExample)
-                    ProductCardScreenDestination(navController = rememberNavController(), productJson = productJson )
-                    //AppNavigation()
+                    AppNavigation()
                 }
             }
         }
