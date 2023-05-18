@@ -15,7 +15,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.dashkevich.gourmets.R
-import com.dashkevich.gourmets.data.model.Product
+import com.dashkevich.gourmets.data.api.model.Product
 import com.dashkevich.gourmets.ui.screens.product_card.components.BackArrow
 import com.dashkevich.gourmets.ui.components.BottomButton
 import com.dashkevich.gourmets.ui.screens.product_card.components.FoodParamItem
@@ -36,70 +36,72 @@ fun ProductCardScreen(
     onSendEvent: (event: ProductCardEvent) -> Unit,
     navController: NavController,
 ) {
-    val product: Product = viewState.product[0]
-    val scrollState = rememberScrollState()
-    Box {
-        Column(modifier = Modifier.verticalScroll(scrollState)) {
+    if(viewState.product!= listOf<Product>() ) {
+        val product: Product = viewState.product[0]
+        val scrollState = rememberScrollState()
+        Box {
+            Column(modifier = Modifier.verticalScroll(scrollState)) {
 
-            Image(
-                painter = painterResource(id = R.drawable.food),
-                contentDescription = null,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(375.dp)
-            )
-            Spacer(modifier = Modifier.height(24.dp))
-            Text(
-                text = product.name,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.padding(start = 16.dp, end = 16.dp),
-                style = Theme.fonts.h4,
-                color = Theme.colors.onSurfaceSecondary
-            )
-            Text(
-                text = product.description,
-                modifier = Modifier.padding(start = 16.dp, end = 16.dp),
-                style = Theme.fonts.body1,
-                color = Theme.colors.onSurfaceTernary
-            )
-            Spacer(modifier = Modifier.height(24.dp))
-            fun measureUnitConcatenation(value: Any): String {
-                return value.toString() + " ${product.measureUnit}"
-            }
-
-            val productAttrs = remember {
-                listOf(
-                    Pair("Вес", measureUnitConcatenation(product.measure)),
-                    Pair("Энерг. ценность", "${product.energyPer100Grams} калл"),
-                    Pair("Белки", measureUnitConcatenation(product.proteinsPer100Grams)),
-                    Pair("Жиры", measureUnitConcatenation(product.fatsPer100Grams)),
-                    Pair("Углеводы", measureUnitConcatenation(product.carbohydratesPer100Grams))
+                Image(
+                    painter = painterResource(id = R.drawable.food),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(375.dp)
                 )
-            }
-            productAttrs.forEach { param ->
+                Spacer(modifier = Modifier.height(24.dp))
+                Text(
+                    text = product.name,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(start = 16.dp, end = 16.dp),
+                    style = Theme.fonts.h4,
+                    color = Theme.colors.onSurfaceSecondary
+                )
+                Text(
+                    text = product.description,
+                    modifier = Modifier.padding(start = 16.dp, end = 16.dp),
+                    style = Theme.fonts.body1,
+                    color = Theme.colors.onSurfaceTernary
+                )
+                Spacer(modifier = Modifier.height(24.dp))
+                fun measureUnitConcatenation(value: Any): String {
+                    return value.toString() + " ${product.measureUnit}"
+                }
+
+                val productAttrs = remember {
+                    listOf(
+                        Pair("Вес", measureUnitConcatenation(product.measure)),
+                        Pair("Энерг. ценность", "${product.energyPer100Grams} калл"),
+                        Pair("Белки", measureUnitConcatenation(product.proteinsPer100Grams)),
+                        Pair("Жиры", measureUnitConcatenation(product.fatsPer100Grams)),
+                        Pair("Углеводы", measureUnitConcatenation(product.carbohydratesPer100Grams))
+                    )
+                }
+                productAttrs.forEach { param ->
+                    Divider(
+                        color = Color(0x1F000000), modifier = Modifier
+                            .height(1.dp)
+                            .fillMaxWidth()
+                    )
+                    FoodParamItem(name = param.first, value = param.second)
+                }
                 Divider(
                     color = Color(0x1F000000), modifier = Modifier
                         .height(1.dp)
                         .fillMaxWidth()
                 )
-                FoodParamItem(name = param.first, value = param.second)
+                Spacer(modifier = Modifier.height(93.dp))
             }
-            Divider(
-                color = Color(0x1F000000), modifier = Modifier
-                    .height(1.dp)
-                    .fillMaxWidth()
-            )
-            Spacer(modifier = Modifier.height(93.dp))
-        }
-        BackArrow(onClick = { onSendEvent(ProductCardEvent.ClickedArrowBack) })
-        BottomButton(onClick = { onSendEvent(ProductCardEvent.ClickedBuyButton) }) {
-            Text(
-                text = "В корзину за ${product.priceCurrent} ₽",
-                color = Theme.colors.surface,
-                style = Theme.fonts.button,
-                maxLines = 1
-            )
+            BackArrow(onClick = { onSendEvent(ProductCardEvent.ClickedArrowBack) })
+            BottomButton(onClick = { onSendEvent(ProductCardEvent.ClickedBuyButton) }) {
+                Text(
+                    text = "В корзину за ${product.priceCurrent} ₽",
+                    color = Theme.colors.surface,
+                    style = Theme.fonts.button,
+                    maxLines = 1
+                )
+            }
         }
     }
     LaunchedEffect(key1 = Unit){
