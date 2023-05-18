@@ -35,7 +35,61 @@ fun ProductCardScreen(
     navController: NavController,
     product: Product
 ) {
+    val scrollState = rememberScrollState()
     Box {
+        Column(modifier = Modifier.verticalScroll(scrollState)) {
+
+            Image(
+                painter = painterResource(id = R.drawable.food),
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(375.dp)
+            )
+            Spacer(modifier = Modifier.height(24.dp))
+            Text(
+                text = product.name,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.padding(start = 16.dp, end = 16.dp),
+                style = Theme.fonts.h4,
+                color = Theme.colors.onSurfaceSecondary
+            )
+            Text(
+                text = product.description,
+                modifier = Modifier.padding(start = 16.dp, end = 16.dp),
+                style = Theme.fonts.body1,
+                color = Theme.colors.onSurfaceTernary
+            )
+            Spacer(modifier = Modifier.height(24.dp))
+            fun measureUnitConcatenation(value: Any): String {
+                return value.toString() + " ${product.measureUnit}"
+            }
+
+            val productAttrs = remember {
+                listOf(
+                    Pair("Вес", measureUnitConcatenation(product.measure)),
+                    Pair("Энерг. ценность", "${product.energyPer100Grams} калл"),
+                    Pair("Белки", measureUnitConcatenation(product.proteinsPer100Grams)),
+                    Pair("Жиры", measureUnitConcatenation(product.fatsPer100Grams)),
+                    Pair("Углеводы", measureUnitConcatenation(product.carbohydratesPer100Grams))
+                )
+            }
+            productAttrs.forEach { param ->
+                Divider(
+                    color = Color(0x1F000000), modifier = Modifier
+                        .height(1.dp)
+                        .fillMaxWidth()
+                )
+                FoodParamItem(name = param.first, value = param.second)
+            }
+            Divider(
+                color = Color(0x1F000000), modifier = Modifier
+                    .height(1.dp)
+                    .fillMaxWidth()
+            )
+            Spacer(modifier = Modifier.height(93.dp))
+        }
         BackArrow(onClick = { onSendEvent(ProductCardEvent.ClickedArrowBack) })
     }
     LaunchedEffect(key1 = Unit){
