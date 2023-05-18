@@ -25,7 +25,11 @@ import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun ProductCardScreen(
+    viewState: ProductCardState,
+    effectFlow: Flow<ProductCardEffect>,
+    onSendEvent: (event: ProductCardEvent) -> Unit,
     navController: NavController,
     product: Product
 ) {
+
 }
