@@ -1,6 +1,6 @@
 package com.dashkevich.gourmets.ui.util
 
-import com.dashkevich.gourmets.data.model.Product
+import com.dashkevich.gourmets.data.api.model.Product
 
 val productExample: Product = Product(
     categoryId = 1,

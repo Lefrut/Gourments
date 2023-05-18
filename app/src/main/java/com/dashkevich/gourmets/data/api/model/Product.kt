@@ -1,4 +1,4 @@
-package com.dashkevich.gourmets.data.model
+package com.dashkevich.gourmets.data.api.model
 
 
 import com.google.gson.annotations.SerializedName
