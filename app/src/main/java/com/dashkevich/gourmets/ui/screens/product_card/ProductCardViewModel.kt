@@ -14,6 +14,12 @@ class ProductCardViewModel: MVIViewModel<ProductCardEvent, ProductCardState, Pro
             ProductCardEvent.ClickedArrowBack -> {
                  setEffect { ProductCardEffect.NavigateBack }
             }
+            ProductCardEvent.ClickedBuyButton -> {
+                TODO("" +
+                        "1. Добавить товар в корзину" +
+                        "2. Изменить на счетчик"
+                )
+            }
         }
     }
 }

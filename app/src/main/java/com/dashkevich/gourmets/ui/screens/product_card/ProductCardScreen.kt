@@ -91,6 +91,14 @@ fun ProductCardScreen(
             Spacer(modifier = Modifier.height(93.dp))
         }
         BackArrow(onClick = { onSendEvent(ProductCardEvent.ClickedArrowBack) })
+        BottomButton(onClick = { onSendEvent(ProductCardEvent.ClickedBuyButton) }) {
+            Text(
+                text = "В корзину за ${product.priceCurrent} ₽",
+                color = Theme.colors.surface,
+                style = Theme.fonts.button,
+                maxLines = 1
+            )
+        }
     }
     LaunchedEffect(key1 = Unit){
         effectFlow.onEach { effect ->
