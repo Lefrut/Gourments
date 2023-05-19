@@ -45,7 +45,7 @@ fun CatalogScreen(
                 })
         },
         bottomBar = {
-            CatalogButton()
+            CatalogButton(viewState.totalPrice)
         }
     ) { scaffoldPadding ->
         Column(

@@ -11,12 +11,13 @@ import androidx.compose.ui.unit.dp
 import com.dashkevich.gourmets.R
 import com.dashkevich.gourmets.ui.components.BottomButton
 import com.dashkevich.gourmets.ui.theme.Theme
+import com.dashkevich.gourmets.ui.util.ProductBasket
 
 @Composable
-fun CatalogButton() {
+fun CatalogButton(totalPrice: Int) {
     //Todo - Доделать логику
     Box() {
-        BottomButton(onButtonClick = {}, haveInBasket = false, onMinusClick = {} ) {
+        BottomButton(onButtonClick = {}, haveInBasket = false, onMinusClick = {}) {
             Row(
                 modifier = Modifier.fillMaxHeight(),
                 verticalAlignment = Alignment.CenterVertically
@@ -28,7 +29,8 @@ fun CatalogButton() {
                 )
                 Spacer(modifier = Modifier.width(9.67.dp))
                 Text(
-                    text = "2160 ₽",
+
+                    text = "$totalPrice ₽",
                     color = Theme.colors.surface,
                     style = Theme.fonts.button,
                     maxLines = 1

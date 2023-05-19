@@ -9,6 +9,7 @@ object NavigationTree {
     object Routes{
         const val CATALOG = "catalog"
         const val PRODUCT_CARD = "product_card"
+        const val SPLASH = "splash"
     }
 
 }

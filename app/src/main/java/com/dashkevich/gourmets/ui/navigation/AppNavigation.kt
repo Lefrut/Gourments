@@ -9,6 +9,7 @@ import androidx.navigation.navArgument
 import com.dashkevich.gourmets.ui.navigation.destinations.CatalogScreenDestination
 import com.dashkevich.gourmets.ui.navigation.destinations.ProductCardScreenDestination
 import com.dashkevich.gourmets.ui.navigation.model.NavigationTree
+import com.dashkevich.gourmets.ui.screens.splash.SplashScreen
 
 @Composable
 fun AppNavigation() {
@@ -16,9 +17,11 @@ fun AppNavigation() {
 
     NavHost(
         navController = navController,
-        startDestination = NavigationTree.Routes.CATALOG
+        startDestination = NavigationTree.Routes.SPLASH
     ) {
-
+        composable(route = NavigationTree.Routes.SPLASH){
+            SplashScreen(navController = navController)
+        }
         composable(route = NavigationTree.Routes.CATALOG) {
             CatalogScreenDestination(navController = navController)
         }

@@ -12,7 +12,8 @@ data class CatalogState(
     val filters: List<Pair<TagX, Boolean>> = emptyList(),
     val openBottomSheet: Boolean = false,
     val productList: List<Product> = emptyList(),
-    val productsBasket: Map<Int, Int> = ProductBasket.getProducts().toMap()
+    val productsBasket: Map<Int, Int> = ProductBasket.getProducts().toMap(),
+    val totalPrice: Int = 0
 )
 
 class CategoriesTab(

@@ -3,6 +3,7 @@ package com.dashkevich.gourmets.ui.util
 object ProductBasket {
 
     private val products: MutableMap<Int, Int> = mutableMapOf()
+    private val productsPrice: MutableMap<Int, Int> = mutableMapOf()
 
     fun getProducts() = products
 
@@ -13,14 +14,25 @@ object ProductBasket {
         return true
     }
 
-    fun addProduct(id: Int) {
+    fun addProduct(id: Int, price: Int = 0) {
         val product = products[id]
-        if (product == null) products[id] = 1
+        if (product == null) {
+            products[id] = 1
+            productsPrice[id] = price
+        }
         else {
             products[id] = products[id]!! + 1
         }
-        products[id]?.plus(1) ?: products.put(id, 1)
 
+    }
+
+    fun getPrice() : Int{
+        var result = 0
+        productsPrice.forEach{ productPrice ->
+            val count = products[productPrice.key] ?: 1
+            result += count * productPrice.value
+        }
+        return result
     }
 
     fun isEmpty(): Boolean = products.isEmpty()

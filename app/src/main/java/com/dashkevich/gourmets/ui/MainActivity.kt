@@ -10,6 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import com.dashkevich.gourmets.ui.navigation.AppNavigation
 import com.dashkevich.gourmets.ui.navigation.destinations.ProductCardScreenDestination
 import com.dashkevich.gourmets.ui.navigation.model.NavigationTree
+import com.dashkevich.gourmets.ui.screens.splash.SplashScreen
 import com.dashkevich.gourmets.ui.theme.GourmetsTheme
 import com.dashkevich.gourmets.ui.theme.Theme
 import com.dashkevich.gourmets.ui.util.productExample

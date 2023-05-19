@@ -24,7 +24,6 @@ class CatalogViewModel(
     }
 
 
-
     private fun getCategories() = viewModelScope.launch {
         setState {
             copy(categoriesTab = CategoriesTab(state = OperationState.Loading))
@@ -131,14 +130,24 @@ class CatalogViewModel(
                 getProducts()
             }
             is CatalogEvent.ClickedCardButton -> {
-                ProductBasket.addProduct(event.idProduct)
-                setState { copy(productsBasket = ProductBasket.getProducts().toMap()) }
-                Log.d("DebugCatalog", ProductBasket.getProducts().toString())
-                Log.d("DebugCatalog", viewState.value.productsBasket.toString())
+                val productPrice =
+                    viewState.value.productList.first { it.id == event.idProduct }.priceCurrent
+                ProductBasket.addProduct(event.idProduct, price = productPrice)
+                setState {
+                    copy(
+                        productsBasket = ProductBasket.getProducts().toMap(),
+                        totalPrice = ProductBasket.getPrice()
+                    )
+                }
             }
             is CatalogEvent.ClickedMinusCounter -> {
                 ProductBasket.reduceProduct(event.idProduct)
-                setState { copy(productsBasket = ProductBasket.getProducts().toMap()) }
+                setState {
+                    copy(
+                        productsBasket = ProductBasket.getProducts().toMap(),
+                        totalPrice = ProductBasket.getPrice()
+                    )
+                }
             }
         }
     }
