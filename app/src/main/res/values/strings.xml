@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Gourmets</string>
+    <string name="не_одной_категории_не_найдено">Не одной категории не найдено</string>
+    <string name="Ошибка_получения_данных">Ошибка получения данных</string>
+    <string name="готово">Готово</string>
+    <string name="Подобрать_блюда">Подобрать блюда</string>
 </resources>

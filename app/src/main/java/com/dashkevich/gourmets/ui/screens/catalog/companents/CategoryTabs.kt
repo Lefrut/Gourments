@@ -12,25 +12,24 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.dashkevich.gourmets.ui.screens.catalog.model.mvi.CategoriesTab
 import com.dashkevich.gourmets.ui.theme.GourmetsTheme
 import com.dashkevich.gourmets.ui.theme.Theme
 import com.dashkevich.gourmets.ui.util.ZeroCardElevation
 
 
 @Composable
-fun CategoryTabs() {
-    var selectedCategory by remember { mutableStateOf(0) }
-    val foodCategories = listOf("Роллы", "Наборы", "Горячие блюда", "Супы")
+fun CategoryTabs(categoriesTab: CategoriesTab, selectedTab: Int, onSelected: (Int) -> Unit) {
 
     ScrollableTabRow(
-        modifier = Modifier.fillMaxWidth(),
-        selectedTabIndex = selectedCategory,
+        modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+        selectedTabIndex = selectedTab,
         edgePadding = 16.dp,
         divider = { },
         indicator = { },
         containerColor = Theme.colors.surface
     ) {
-        foodCategories.forEachIndexed { index, title ->
+        categoriesTab.categories.forEachIndexed { index, category ->
             val tabPadding = when (index) {
                 0 -> {
                     PaddingValues(0.dp)
@@ -41,9 +40,9 @@ fun CategoryTabs() {
             }
             TabCategory(
                 modifier = Modifier.padding(tabPadding),
-                isSelected = selectedCategory == index,
-                onClick = { selectedCategory = index },
-                name = title
+                isSelected = selectedTab == index,
+                onClick = { onSelected(index) },
+                name = category.name
             )
 
         }

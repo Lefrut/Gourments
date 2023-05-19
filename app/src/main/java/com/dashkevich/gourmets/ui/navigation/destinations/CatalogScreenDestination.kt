@@ -11,9 +11,10 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun CatalogScreenDestination(navController: NavController) {
     val catalogViewModel = getViewModel<CatalogViewModel>()
-    val viewState by catalogViewModel.viewState.collectAsState()
     CatalogScreen(
-        viewState, { event -> catalogViewModel.processingIntent(event) },
-        navController
+        catalogViewModel.viewState.value,
+        onSendEvent =  { event -> catalogViewModel.handleEvents(event) },
+        effectFlow = catalogViewModel.effect,
+        navController = navController
     )
 }
