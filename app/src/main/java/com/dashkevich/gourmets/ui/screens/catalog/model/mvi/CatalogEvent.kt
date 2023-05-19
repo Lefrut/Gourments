@@ -7,7 +7,7 @@ sealed class CatalogEvent(){
     object ClickedSearch: CatalogEvent()
     class ClickedTab(val indexTab: Int): CatalogEvent()
     class ClickedFoodCard(val idFood: Int): CatalogEvent()
-    class ClickedItemFilter(index: Int, newState: Boolean): CatalogEvent()
+    class ClickedItemFilter(val index: Int,val newState: Boolean): CatalogEvent()
     class ClickedButtonFilter() : CatalogEvent()
     class CloseBottomSheet(value: Boolean): CatalogEvent()
 

@@ -71,7 +71,12 @@ class CatalogViewModel(
 
             }
             is CatalogEvent.ClickedItemFilter -> {
-
+                val (index, value) = Pair(event.index, event.newState)
+                val mutableList = viewState.value.filters.toMutableList()
+                mutableList[index] = mutableList[index].copy(second = value)
+                setState { copy(
+                    filters = mutableList.toList()
+                ) }
             }
             is CatalogEvent.CloseBottomSheet -> {
 
