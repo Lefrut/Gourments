@@ -18,9 +18,9 @@ val productsS = listOf<Product>(
         name = "Хек"
     ),
     Product(
-        categoryId = 1,
+        categoryId = 2,
         description = "Вкусная еда",
-        id = 1,
+        id = 2,
         image = "url/img.jpg",
         energyPer100Grams = 230.9,
         fatsPer100Grams = 2.8,
@@ -31,12 +31,12 @@ val productsS = listOf<Product>(
         tagIds = emptyList(),
         measure = 300,
         measureUnit = "кг",
-        name = "Хек"
+        name = "Курица"
     ),
     Product(
-        categoryId = 1,
+        categoryId = 3,
         description = "Вкусная еда",
-        id = 1,
+        id = 3,
         image = "url/img.jpg",
         energyPer100Grams = 230.9,
         fatsPer100Grams = 2.8,
@@ -47,6 +47,6 @@ val productsS = listOf<Product>(
         tagIds = emptyList(),
         measure = 300,
         measureUnit = "кг",
-        name = "Хек"
+        name = "Лосось"
     )
 )

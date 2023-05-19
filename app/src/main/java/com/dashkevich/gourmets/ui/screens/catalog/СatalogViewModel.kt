@@ -9,6 +9,7 @@ import com.dashkevich.gourmets.ui.screens.catalog.model.mvi.CatalogEffect
 import com.dashkevich.gourmets.ui.screens.catalog.model.mvi.CatalogEvent
 import com.dashkevich.gourmets.ui.screens.catalog.model.mvi.CatalogState
 import com.dashkevich.gourmets.ui.screens.catalog.model.mvi.CategoriesTab
+import com.dashkevich.gourmets.ui.util.ProductBasket
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -128,6 +129,16 @@ class CatalogViewModel(
             is CatalogEvent.SelectedTab -> {
                 setState { copy(selectedTab = event.index) }
                 getProducts()
+            }
+            is CatalogEvent.ClickedCardButton -> {
+                ProductBasket.addProduct(event.idProduct)
+                setState { copy(productsBasket = ProductBasket.getProducts().toMap()) }
+                Log.d("DebugCatalog", ProductBasket.getProducts().toString())
+                Log.d("DebugCatalog", viewState.value.productsBasket.toString())
+            }
+            is CatalogEvent.ClickedMinusCounter -> {
+                ProductBasket.reduceProduct(event.idProduct)
+                setState { copy(productsBasket = ProductBasket.getProducts().toMap()) }
             }
         }
     }

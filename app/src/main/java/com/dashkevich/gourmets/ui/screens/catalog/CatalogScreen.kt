@@ -18,11 +18,9 @@ import com.dashkevich.gourmets.ui.screens.catalog.model.mvi.CatalogEvent
 import com.dashkevich.gourmets.ui.screens.catalog.model.mvi.CatalogState
 import com.dashkevich.gourmets.ui.screens.catalog.companents.GourmetsTopBar
 import com.dashkevich.gourmets.ui.screens.catalog.companents.CatalogButton
-import com.dashkevich.gourmets.ui.screens.catalog.companents.FoodCard
+import com.dashkevich.gourmets.ui.screens.catalog.companents.CatalogFoodCard
 import com.dashkevich.gourmets.ui.screens.catalog.model.mvi.CatalogEffect
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEach
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -61,19 +59,29 @@ fun CatalogScreen(
             ) {
                 items(viewState.productList.size) { index ->
 
+                    val product = viewState.productList[index]
                     val modifier =
                         if (index % 2 == 1) Modifier.padding(PaddingValues(start = 4.dp))
                         else Modifier.padding(PaddingValues(end = 4.dp))
-                    FoodCard(
-                        product = viewState.productList[index],
+
+                    val haveInBasket = viewState.productsBasket[product.id] != null
+                    val count = viewState.productsBasket[product.id] ?: 0
+
+                    CatalogFoodCard(
+                        product = product,
                         modifier = modifier.padding(bottom = 8.dp),
                         onClick = {
-                            Log.d("DebugCatalog","onClick")
+                            Log.d("DebugCatalog", "onClick")
                             onSendEvent(CatalogEvent.ClickedFoodCard(it))
                         },
                         onButtonClick = {
-
-                        }
+                            onSendEvent(CatalogEvent.ClickedCardButton(it))
+                        },
+                        onMinusCounter = {
+                            onSendEvent(CatalogEvent.ClickedMinusCounter(it))
+                        },
+                        haveInBasket = haveInBasket,
+                        countInBasket = count
                     )
                 }
             }
@@ -101,7 +109,7 @@ fun CatalogScreen(
         effectFlow?.collect { effect ->
             when (effect) {
                 is CatalogEffect.NavigateToProductCard -> {
-                    Log.d("DebugCatalog","Navigate to Id product - " + effect.idProduct.toString())
+                    Log.d("DebugCatalog", "Navigate to Id product - " + effect.idProduct.toString())
                     navController.navigate(NavigationTree.Routes.PRODUCT_CARD + "/${effect.idProduct}")
                 }
             }

@@ -1,7 +1,5 @@
 package com.dashkevich.gourmets.ui.screens.catalog.model.mvi
 
-import java.util.Calendar
-
 sealed class CatalogEvent(){
     object ClickedFilter: CatalogEvent()
     object ClickedSearch: CatalogEvent()
@@ -11,5 +9,7 @@ sealed class CatalogEvent(){
     class ClickedButtonFilter() : CatalogEvent()
     class CloseBottomSheet(val value: Boolean): CatalogEvent()
     class SelectedTab(val index: Int) : CatalogEvent()
+    class ClickedCardButton(val idProduct: Int) : CatalogEvent()
+    class ClickedMinusCounter(val idProduct: Int) : CatalogEvent()
 
 }
