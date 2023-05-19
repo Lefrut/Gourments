@@ -3,6 +3,7 @@ package com.dashkevich.gourmets.ui.screens.catalog.companents
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -14,10 +15,9 @@ import com.dashkevich.gourmets.ui.theme.Theme
 
 @Composable
 fun CatalogFilterItem(name: String, isChecked: Boolean, onCheckedClick: () -> Unit) {
-    Column {
+    Column(modifier = Modifier.padding(horizontal = 24.dp)) {
         Row(
             modifier = Modifier
-                .padding(horizontal = 24.dp)
                 .height(48.dp)
                 .fillMaxWidth()
                 .clickable { onCheckedClick() },
@@ -36,9 +36,15 @@ fun CatalogFilterItem(name: String, isChecked: Boolean, onCheckedClick: () -> Un
                 onCheckedChange = { onCheckedClick() },
                 modifier = Modifier
                     .padding(end = 3.dp, start = 19.dp)
-                    .size(18.dp)
+                    .size(18.dp),
+                colors = CheckboxDefaults.colors(
+                    checkedColor = Theme.colors.primary,
+                    uncheckedColor = Color(0x1F000000)
+                )
             )
         }
-        Divider(modifier = Modifier.fillMaxWidth().height(1.dp), color = Color(0x1F000000))
+        Divider(modifier = Modifier
+            .fillMaxWidth()
+            .height(1.dp), color = Color(0x1F000000))
     }
 }
