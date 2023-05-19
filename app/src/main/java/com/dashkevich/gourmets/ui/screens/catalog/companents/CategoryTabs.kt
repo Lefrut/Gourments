@@ -1,5 +1,6 @@
 package com.dashkevich.gourmets.ui.screens.catalog.companents
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,7 +23,7 @@ fun CategoryTabs(categoriesTab: CategoriesTab) {
     var selectedCategory by remember { mutableStateOf(0) }
 
     ScrollableTabRow(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().fillMaxHeight(),
         selectedTabIndex = selectedCategory,
         edgePadding = 16.dp,
         divider = { },
@@ -63,7 +64,7 @@ private fun TabCategory(
         Pair(Color.Transparent, Theme.colors.onSurfaceSecondary)
     Card(
         modifier = modifier
-            .fillMaxHeight()
+            .height(40.dp)
             .clickable { onClick() },
         shape = RoundedCornerShape(Theme.shapes.default),
         colors = CardDefaults.cardColors(

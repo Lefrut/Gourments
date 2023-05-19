@@ -45,7 +45,14 @@ class GourmetsRepositoryImpl(
 
     override suspend fun getCategories()
             : Result<List<Category>> = coroutineCatching(dispatcher) {
-        gourmetsService.getCategories()
+        mockWebService.start()
+        mockWebService.enqueueDefault(
+            context = context,
+            filename = "categories.json",
+        )
+        val result = fakeApi.getCategories()
+        mockWebService.shutdown()
+        result
     }
 
 }
@@ -55,12 +62,6 @@ fun MockWebServer.enqueueDefault(
     code: Int = 200,
     context: Context,
     filterText: (InputStream) -> String = { inputStream ->
-//        val sb: StringBuilder = StringBuilder()
-//        var ch: Int = 0
-//        while (inputStream.read().also { ch = it } != -1) {
-//            sb.append(ch.toChar())
-//        }
-//        sb.toString()
         val scan = Scanner(inputStream).useDelimiter("\\A")
         val result = if(scan.hasNext()){
             scan.next()

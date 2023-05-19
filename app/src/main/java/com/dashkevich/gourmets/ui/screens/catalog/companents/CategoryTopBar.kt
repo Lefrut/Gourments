@@ -93,7 +93,7 @@ fun GourmetsTopBar(modifier: Modifier = Modifier, categoriesTab: CategoriesTab, 
                             .align(
                                 Alignment.Center
                             )
-                            .size(30.dp)
+                            .size(10.dp)
                     )
                 }
                 OperationState.None -> {}
