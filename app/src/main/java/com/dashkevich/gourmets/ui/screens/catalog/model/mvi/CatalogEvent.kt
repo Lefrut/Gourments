@@ -9,6 +9,7 @@ sealed class CatalogEvent(){
     class ClickedFoodCard(val idFood: Int): CatalogEvent()
     class ClickedItemFilter(val index: Int,val newState: Boolean): CatalogEvent()
     class ClickedButtonFilter() : CatalogEvent()
-    class CloseBottomSheet(value: Boolean): CatalogEvent()
+    class CloseBottomSheet(val value: Boolean): CatalogEvent()
+    class SelectedTab(val index: Int) : CatalogEvent()
 
 }

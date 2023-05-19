@@ -19,12 +19,11 @@ import com.dashkevich.gourmets.ui.util.ZeroCardElevation
 
 
 @Composable
-fun CategoryTabs(categoriesTab: CategoriesTab) {
-    var selectedCategory by remember { mutableStateOf(0) }
+fun CategoryTabs(categoriesTab: CategoriesTab, selectedTab: Int, onSelected: (Int) -> Unit) {
 
     ScrollableTabRow(
         modifier = Modifier.fillMaxWidth().fillMaxHeight(),
-        selectedTabIndex = selectedCategory,
+        selectedTabIndex = selectedTab,
         edgePadding = 16.dp,
         divider = { },
         indicator = { },
@@ -41,8 +40,8 @@ fun CategoryTabs(categoriesTab: CategoriesTab) {
             }
             TabCategory(
                 modifier = Modifier.padding(tabPadding),
-                isSelected = selectedCategory == index,
-                onClick = { selectedCategory = index },
+                isSelected = selectedTab == index,
+                onClick = { onSelected(index) },
                 name = category.name
             )
 

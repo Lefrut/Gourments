@@ -21,7 +21,13 @@ import com.dashkevich.gourmets.ui.theme.Theme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GourmetsTopBar(modifier: Modifier = Modifier, categoriesTab: CategoriesTab, onClickFilter: () -> Unit) {
+fun GourmetsTopBar(
+    modifier: Modifier = Modifier,
+    categoriesTab: CategoriesTab,
+    onClickFilter: () -> Unit,
+    selectedTab: Int,
+    onSelectedTab: (Int) -> Unit
+) {
 
     //Todo - фиксация топлайна при прокруте
     Column(
@@ -70,7 +76,12 @@ fun GourmetsTopBar(modifier: Modifier = Modifier, categoriesTab: CategoriesTab, 
                 .background(color = Theme.colors.surface)
         )
         spacer()
-        Box(modifier = Modifier.height(40.dp).fillMaxWidth().background(color = Theme.colors.surface)) {
+        Box(
+            modifier = Modifier
+                .height(40.dp)
+                .fillMaxWidth()
+                .background(color = Theme.colors.surface)
+        ) {
             when (categoriesTab.state) {
                 OperationState.EmptyResult -> {
                     Text(
@@ -81,7 +92,7 @@ fun GourmetsTopBar(modifier: Modifier = Modifier, categoriesTab: CategoriesTab, 
                     )
                 }
                 OperationState.Success -> {
-                    CategoryTabs(categoriesTab = categoriesTab)
+                    CategoryTabs(categoriesTab = categoriesTab,selectedTab = selectedTab , onSelected = { onSelectedTab(it) })
                 }
                 OperationState.Error -> {
                     ErrorText(modifier = Modifier.align(Alignment.Center))
@@ -90,10 +101,9 @@ fun GourmetsTopBar(modifier: Modifier = Modifier, categoriesTab: CategoriesTab, 
                     CircularProgressIndicator(
                         color = Theme.colors.primary,
                         modifier = Modifier
-                            .align(
-                                Alignment.Center
-                            )
-                            .size(10.dp)
+                            .align(Alignment.Center)
+                            .size(30.dp),
+                        strokeWidth = 4.dp
                     )
                 }
                 OperationState.None -> {}

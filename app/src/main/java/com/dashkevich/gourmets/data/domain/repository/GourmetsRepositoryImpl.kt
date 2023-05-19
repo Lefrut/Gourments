@@ -3,12 +3,15 @@ package com.dashkevich.gourmets.data.domain.repository
 import android.content.Context
 import com.dashkevich.gourmets.data.api.GourmetsService
 import com.dashkevich.gourmets.data.api.model.Category
+import com.dashkevich.gourmets.data.api.model.Product
 import com.dashkevich.gourmets.data.api.model.TagX
 import com.dashkevich.gourmets.data.util.coroutineCatching
+import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
+import productsS
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.InputStream
@@ -28,51 +31,74 @@ class GourmetsRepositoryImpl(
             .addConverterFactory(GsonConverterFactory.create())
             .build().create(GourmetsService::class.java)
     }
+    private var firstLaunch = true
 
     override suspend fun getTags()
             : Result<List<TagX>> {
         return coroutineCatching(dispatcher) {
-            mockWebService.start()
             mockWebService.enqueueDefault(
                 context = context,
                 filename = "tags.json",
             )
-            val result = fakeApi.getTags()
-            mockWebService.shutdown()
-            result
+            fakeApi.getTags()
         }
     }
 
     override suspend fun getCategories()
             : Result<List<Category>> = coroutineCatching(dispatcher) {
-        mockWebService.start()
+        if(firstLaunch){
+            mockWebService.start()
+            firstLaunch = false
+        }
         mockWebService.enqueueDefault(
             context = context,
             filename = "categories.json",
         )
-        val result = fakeApi.getCategories()
+        fakeApi.getCategories()
+    }
+
+    override suspend fun getProducts(idTags: List<Int>, idCategory: Int): Result<List<Product>> {
+        return coroutineCatching(dispatcher) {
+            mockWebService.enqueueDefault(
+                context = context,
+                filename = "products.json",
+                filterText = { inputStream ->
+                    val json = Gson().toJson(productsS)
+                    json
+                }
+            )
+            fakeApi.getProducts(idTags, idCategory)
+        }
+    }
+
+    override fun shutDown() {
         mockWebService.shutdown()
-        result
+    }
+
+    override fun start() {
+        mockWebService.start()
     }
 
 }
 
+@Synchronized
 fun MockWebServer.enqueueDefault(
     filename: String,
     code: Int = 200,
     context: Context,
     filterText: (InputStream) -> String = { inputStream ->
         val scan = Scanner(inputStream).useDelimiter("\\A")
-        val result = if(scan.hasNext()){
+        val result = if (scan.hasNext()) {
             scan.next()
-        }
-        else {
+        } else {
             ""
         }
         result
     }
 ) {
-    val inputStream = context.assets.open(filename)//.source().buffer()
-    val json = filterText(inputStream)
-    enqueue(MockResponse().setResponseCode(code).setBody(json))
+    synchronized(this) {
+        val inputStream = context.assets.open(filename)//.source().buffer()
+        val json = filterText(inputStream)
+        enqueue(MockResponse().setResponseCode(code).setBody(json))
+    }
 }

@@ -66,12 +66,6 @@ fun CatalogBottomSheet(
                     PrimaryButton(
                         onClick = {
                             onButtonClick()
-                            scope.launch { sheetState.hide() }.invokeOnCompletion {
-                                if (!sheetState.isVisible) {
-                                    onCloseBottomSheet(false)
-                                }
-                            }
-
                         },
                         modifier = Modifier
                             .align(Alignment.CenterHorizontally)

@@ -7,6 +7,7 @@ import com.dashkevich.gourmets.data.api.model.TagX
 
 data class CatalogState(
     val categoriesTab: CategoriesTab = CategoriesTab(),
+    val selectedTab: Int = 0,
     val filters: List<Pair<TagX, Boolean>> = emptyList(),
     val openBottomSheet: Boolean = false,
     val productList: List<Product> = emptyList()
