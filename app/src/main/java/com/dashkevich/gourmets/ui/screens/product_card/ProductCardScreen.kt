@@ -23,8 +23,6 @@ import com.dashkevich.gourmets.ui.screens.product_card.model.ProductCardEffect
 import com.dashkevich.gourmets.ui.screens.product_card.model.ProductCardEvent
 import com.dashkevich.gourmets.ui.screens.product_card.model.ProductCardState
 import com.dashkevich.gourmets.ui.theme.Theme
-import com.dashkevich.gourmets.ui.util.productJsonExample
-import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
@@ -36,7 +34,7 @@ fun ProductCardScreen(
     onSendEvent: (event: ProductCardEvent) -> Unit,
     navController: NavController,
 ) {
-    if(viewState.product!= listOf<Product>() ) {
+    if (viewState.product != listOf<Product>()) {
         val product: Product = viewState.product[0]
         val scrollState = rememberScrollState()
         Box {
@@ -94,7 +92,14 @@ fun ProductCardScreen(
                 Spacer(modifier = Modifier.height(93.dp))
             }
             BackArrow(onClick = { onSendEvent(ProductCardEvent.ClickedArrowBack) })
-            BottomButton(onClick = { onSendEvent(ProductCardEvent.ClickedBuyButton) }) {
+            BottomButton(
+                onMinusClick = {
+                    onSendEvent(ProductCardEvent.ClickedMinus(product.id))
+                },
+                onButtonClick = { onSendEvent(ProductCardEvent.ClickedBuyButton(product.id)) },
+                haveInBasket = viewState.productsBasket[product.id] != null,
+                count =  viewState.productsBasket[product.id] ?: 0
+            ) {
                 Text(
                     text = "В корзину за ${product.priceCurrent} ₽",
                     color = Theme.colors.surface,
@@ -104,9 +109,9 @@ fun ProductCardScreen(
             }
         }
     }
-    LaunchedEffect(key1 = Unit){
+    LaunchedEffect(key1 = Unit) {
         effectFlow.onEach { effect ->
-            when(effect){
+            when (effect) {
                 ProductCardEffect.NavigateBack -> {
                     Log.i("ProductCardScreen", "Effect active")
                     navController.popBackStack()

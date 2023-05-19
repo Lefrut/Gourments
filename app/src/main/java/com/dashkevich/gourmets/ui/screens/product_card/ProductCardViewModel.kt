@@ -7,6 +7,7 @@ import com.dashkevich.gourmets.data.domain.repository.GourmetsRepository
 import com.dashkevich.gourmets.ui.screens.product_card.model.ProductCardEffect
 import com.dashkevich.gourmets.ui.screens.product_card.model.ProductCardEvent
 import com.dashkevich.gourmets.ui.screens.product_card.model.ProductCardState
+import com.dashkevich.gourmets.ui.util.ProductBasket
 import kotlinx.coroutines.launch
 
 class ProductCardViewModel(
@@ -25,13 +26,14 @@ class ProductCardViewModel(
             ProductCardEvent.ClickedArrowBack -> {
                  setEffect { ProductCardEffect.NavigateBack }
             }
-            ProductCardEvent.ClickedBuyButton -> {
-                TODO("" +
-                        "1. Добавить товар в корзину" +
-                        "2. Изменить на счетчик"
-                )
+            is ProductCardEvent.ClickedBuyButton -> {
+                ProductBasket.addProduct(event.idProduct)
+                setState { copy(productsBasket = ProductBasket.getProducts().toMap()) }
             }
-            else -> {}
+            is ProductCardEvent.ClickedMinus -> {
+                ProductBasket.reduceProduct(event.idProduct)
+                setState { copy(productsBasket = ProductBasket.getProducts().toMap()) }
+            }
         }
     }
 

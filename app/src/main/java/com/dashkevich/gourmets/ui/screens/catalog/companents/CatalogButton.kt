@@ -16,7 +16,7 @@ import com.dashkevich.gourmets.ui.theme.Theme
 fun CatalogButton() {
     //Todo - Доделать логику
     Box() {
-        BottomButton(onClick = {}) {
+        BottomButton(onButtonClick = {}, haveInBasket = false, onMinusClick = {} ) {
             Row(
                 modifier = Modifier.fillMaxHeight(),
                 verticalAlignment = Alignment.CenterVertically

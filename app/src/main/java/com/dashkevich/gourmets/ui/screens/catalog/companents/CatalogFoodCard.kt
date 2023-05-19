@@ -21,7 +21,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.dashkevich.gourmets.R
 import com.dashkevich.gourmets.data.api.model.Product
-import com.dashkevich.gourmets.ui.components.GourmentsCounter
+import com.dashkevich.gourmets.ui.components.GourmetsCounter
 import com.dashkevich.gourmets.ui.theme.Theme
 import com.dashkevich.gourmets.ui.util.ZeroCardElevation
 
@@ -97,7 +97,7 @@ fun CatalogFoodCard(
             )
             Spacer(modifier = Modifier.height(12.dp))
             if (haveInBasket) {
-                GourmentsCounter(
+                GourmetsCounter(
                     modifier = Modifier
                         .padding(horizontal = 12.dp)
                         .size(width = 143.5.dp, height = 40.dp),

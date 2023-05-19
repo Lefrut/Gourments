@@ -20,7 +20,7 @@ import com.dashkevich.gourmets.ui.theme.Theme
 import com.dashkevich.gourmets.ui.util.shadow
 
 @Composable
-fun GourmentsCounter(
+fun GourmetsCounter(
     modifier: Modifier,
     count: Int,
     minusIconSize: Size,
