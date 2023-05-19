@@ -1,5 +1,6 @@
 package com.dashkevich.gourmets.ui.screens.catalog
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -11,6 +12,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.dashkevich.gourmets.ui.navigation.model.NavigationTree
 import com.dashkevich.gourmets.ui.screens.catalog.companents.CatalogBottomSheet
 import com.dashkevich.gourmets.ui.screens.catalog.model.mvi.CatalogEvent
 import com.dashkevich.gourmets.ui.screens.catalog.model.mvi.CatalogState
@@ -19,6 +21,7 @@ import com.dashkevich.gourmets.ui.screens.catalog.companents.CatalogButton
 import com.dashkevich.gourmets.ui.screens.catalog.companents.FoodCard
 import com.dashkevich.gourmets.ui.screens.catalog.model.mvi.CatalogEffect
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 
 
@@ -26,7 +29,7 @@ import kotlinx.coroutines.flow.onEach
 @Composable
 fun CatalogScreen(
     viewState: CatalogState,
-    effectFlow: Flow<CatalogEffect>,
+    effectFlow: Flow<CatalogEffect>?,
     onSendEvent: (event: CatalogEvent) -> Unit,
     navController: NavController,
 ) {
@@ -61,7 +64,17 @@ fun CatalogScreen(
                     val modifier =
                         if (index % 2 == 1) Modifier.padding(PaddingValues(start = 4.dp))
                         else Modifier.padding(PaddingValues(end = 4.dp))
-                    FoodCard(product = viewState.productList[index], modifier = modifier.padding(bottom = 8.dp))
+                    FoodCard(
+                        product = viewState.productList[index],
+                        modifier = modifier.padding(bottom = 8.dp),
+                        onClick = {
+                            Log.d("DebugCatalog","onClick")
+                            onSendEvent(CatalogEvent.ClickedFoodCard(it))
+                        },
+                        onButtonClick = {
+
+                        }
+                    )
                 }
             }
         }
@@ -85,12 +98,14 @@ fun CatalogScreen(
 
 
     LaunchedEffect(key1 = Unit) {
-        effectFlow.onEach { effect ->
+        effectFlow?.collect { effect ->
             when (effect) {
-                else -> {
-
+                is CatalogEffect.NavigateToProductCard -> {
+                    Log.d("DebugCatalog","Navigate to Id product - " + effect.idProduct.toString())
+                    navController.navigate(NavigationTree.Routes.PRODUCT_CARD + "/${effect.idProduct}")
                 }
             }
         }
     }
 }
+

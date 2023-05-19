@@ -6,6 +6,8 @@ import com.dashkevich.gourmets.data.api.model.Category
 import com.dashkevich.gourmets.data.api.model.Product
 import com.dashkevich.gourmets.data.api.model.TagX
 import com.dashkevich.gourmets.data.util.coroutineCatching
+import com.dashkevich.gourmets.ui.util.productExample
+import com.dashkevich.gourmets.ui.util.productJsonExample
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -78,7 +80,7 @@ class GourmetsRepositoryImpl(
                 context = context,
                 filterText = { inputStream ->
                     //Todo - product filter
-                    ""
+                    Gson().toJson(productExample)
                 }
             )
             val result = fakeApi.getProduct(id)

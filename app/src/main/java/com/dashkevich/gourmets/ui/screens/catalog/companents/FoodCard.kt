@@ -29,14 +29,13 @@ import com.dashkevich.gourmets.ui.util.ZeroCardElevation
 fun FoodCard(
     modifier: Modifier = Modifier,
     product: Product,
-    //TODO("Переделать под логику")
-    onClick: () -> Unit = {},
+    onClick: (Int) -> Unit = {},
     onButtonClick: () -> Unit = {}
 ) {
     Card(
         modifier = modifier
             .size(height = 290.dp, width = 167.5.dp)
-            .clickable { onClick() },
+            .clickable { onClick(product.id) },
         shape = RoundedCornerShape(Theme.shapes.default),
         colors = CardDefaults.cardColors(
             containerColor = Theme.colors.background,

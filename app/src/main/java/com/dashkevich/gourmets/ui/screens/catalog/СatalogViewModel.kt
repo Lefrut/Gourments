@@ -110,7 +110,7 @@ class CatalogViewModel(
                 setState { copy(openBottomSheet = !openBottomSheet) }
             }
             is CatalogEvent.ClickedFoodCard -> {
-
+                setEffect { CatalogEffect.NavigateToProductCard(event.idFood) }
             }
             is CatalogEvent.ClickedItemFilter -> {
                 val (index, value) = Pair(event.index, event.newState)
