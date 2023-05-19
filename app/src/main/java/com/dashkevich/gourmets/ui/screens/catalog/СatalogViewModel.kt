@@ -1,5 +1,6 @@
 package com.dashkevich.gourmets.ui.screens.catalog
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.dashkevich.gourmets.common.OperationState
 import com.dashkevich.gourmets.common.mvi.MVIViewModel
@@ -46,7 +47,15 @@ class CatalogViewModel(
             CatalogEvent.ClickedFilter -> {
                 setState { copy(openBottomSheet = !openBottomSheet) }
                 if(viewState.value.filters.isEmpty()){
-
+                    viewModelScope.launch {
+                        gourmetsRepository.getTags().onSuccess { tags ->
+                            val filters = tags.map { Pair(it, false) }
+                            Log.i("DebugCatalog", filters.toString())
+                            setState { copy(filters = filters) }
+                        }.onFailure {
+                            Log.e("DebugCatalog", it.message.toString())
+                        }
+                    }
                 }
             }
             CatalogEvent.ClickedSearch -> {

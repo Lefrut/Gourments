@@ -27,7 +27,6 @@ fun CatalogBottomSheet(
     onCloseBottomSheet: (Boolean) -> Unit
 ) {
     ModalBottomSheet(
-        scrimColor = Color.Transparent,
         modifier = Modifier
             .height(312.dp)
             .fillMaxWidth(),
@@ -39,11 +38,11 @@ fun CatalogBottomSheet(
         dragHandle = null
     ) {
         Text(
-            text = "Подобрать блюда",
+            text = stringResource(R.string.Подобрать_блюда),
             style = Theme.fonts.h6,
             color = Theme.colors.onSurfaceSecondary,
             modifier = Modifier
-                .padding(start = 24.dp, end = 24.dp, top = 32.dp)
+                .padding(start = 24.dp, end = 24.dp, top = 32.dp, bottom = 16.dp)
                 .fillMaxWidth()
         )
         LazyColumn() {
