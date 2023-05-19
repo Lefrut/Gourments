@@ -5,6 +5,7 @@ import com.dashkevich.gourmets.data.api.model.Product
 import com.dashkevich.gourmets.data.api.model.TagX
 import retrofit2.http.GET
 import retrofit2.http.Query
+import retrofit2.http.Path
 
 
 interface GourmetsService {
@@ -20,4 +21,7 @@ interface GourmetsService {
         @Query("tagsId") tagsId: List<Int>,
         @Query("categoryId") categoryId: Int
     ): List<Product>
+
+    @GET(Endpoints.GET_PRODUCT + "/{id}")
+    suspend fun getProduct(@Path("id") id: Int) : Product
 }

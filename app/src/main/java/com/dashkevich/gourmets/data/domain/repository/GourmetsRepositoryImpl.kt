@@ -46,7 +46,7 @@ class GourmetsRepositoryImpl(
 
     override suspend fun getCategories()
             : Result<List<Category>> = coroutineCatching(dispatcher) {
-        if(firstLaunch){
+        if (firstLaunch) {
             mockWebService.start()
             firstLaunch = false
         }
@@ -71,6 +71,21 @@ class GourmetsRepositoryImpl(
         }
     }
 
+    override suspend fun getProduct(id: Int): Result<Product> {
+        return coroutineCatching(dispatcher) {
+            mockWebService.enqueueDefault(
+                filename = "products.json",
+                context = context,
+                filterText = { inputStream ->
+                    //Todo - product filter
+                    ""
+                }
+            )
+            val result = fakeApi.getProduct(id)
+            result
+        }
+    }
+
     override fun shutDown() {
         mockWebService.shutdown()
     }
@@ -78,7 +93,6 @@ class GourmetsRepositoryImpl(
     override fun start() {
         mockWebService.start()
     }
-
 }
 
 @Synchronized
