@@ -65,10 +65,9 @@ class GourmetsRepositoryImpl(
                 context = context,
                 filename = "products.json",
                 filterText = { inputStream ->
-                    /*val json = Gson().toJson(productsS)
-                    json*/
+                    val json = Gson().toJson(productsS)
+                    json
 
-                    ""
                 }
             )
             fakeApi.getProducts(idTags, idCategory)
